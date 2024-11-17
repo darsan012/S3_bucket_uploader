@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title Login
+    link(rel="stylesheet" href="/css/style.css")
+  body
+    .container.mx-auto.p-10
+      h1.text-center.text-3xl.mb-6 Login
+      if error
+        p.text-red-500.text-center #{error}
+      form(action="/login" method="POST" class="flex flex-col")
+        input(type="text" name="username" placeholder="Username" class="mb-4 p-2 border rounded")
+        input(type="password" name="pin" placeholder="PIN" class="mb-4 p-2 border rounded")
+        button(type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded") Login
