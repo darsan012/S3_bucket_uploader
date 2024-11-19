@@ -1,14 +1,107 @@
 doctype html
 html
   head
-    title Login
-    link(rel="stylesheet" href="/css/styles.css")
+    title Login Page
+    link(rel="stylesheet", href="https://www.w3schools.com/w3css/4/w3.css")
+    style.
+      body {
+        background-color: #f0f4f8;  // Light background
+        font-family: 'Roboto', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .login-container {
+        background-color: #ffffff;  // White background for the form
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        height: 60%;
+        max-width: 400px;
+      }
+
+      .login-header {
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: #333;
+        text-align: center;
+        margin-bottom: 30px;
+        letter-spacing: 1px;
+      }
+
+      .w3-input-custom {
+        padding: 15px;
+        margin-bottom: 20px;
+        font-size: 1rem;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+        width: 100%;
+        transition: all 0.3s ease;
+      }
+
+      .w3-input-custom:focus {
+        border-color: #4CAF50;
+        outline: none;
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+      }
+
+      .w3-btn-custom {
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 50px;
+        width: 100%;
+        padding: 15px 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .w3-btn-custom:hover {
+        background-color: #45a049;
+        transform: translateY(-2px);
+      }
+
+      .error-message {
+        text-align: center;
+        color: #f44336;
+        margin-bottom: 20px;
+      }
+
+      .success-message {
+        text-align: center;
+        color: #4CAF50;
+        margin-bottom: 20px;
+      }
+
   body
-    .container.mx-auto.p-10
-      h1.text-center.text-3xl.mb-6 Login
+    .w3-container.login-container
+      h1.login-header Login
+
+      // Show flash error messages if any
       if error
-        p.text-red-500.text-center #{error}
-      form(action="/login" method="POST" class="flex flex-col")
-        input(type="text" name="username" placeholder="Username" class="mb-4 p-2 border rounded")
-        input(type="password" name="pin" placeholder="PIN" class="mb-4 p-2 border rounded")
-        button(type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded") Login
+        div.error-message
+          p #{error}
+
+      // Show flash success messages if any
+      if success
+        div.success-message
+          p #{success}
+
+      // Login Form
+      form(action="/login", method="POST")
+        div
+          label(for="username") Username:
+          input(type="text", name="username", class="w3-input-custom", placeholder="Enter your username", required)
+
+        div
+          label(for="password") Password:
+          input(type="password", name="pin", class="w3-input-custom", placeholder="Enter your password", required)
+
+        button(type="submit", class="w3-btn-custom") Login

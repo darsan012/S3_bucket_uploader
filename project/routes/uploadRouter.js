@@ -57,8 +57,10 @@ uploadRouter.post(
         return s3Client.send(command);
       });
       await Promise.all(uploadPromises);
+      req.flash("success", "Files uploaded successfully!");
       res.redirect("/upload");
     } catch (error) {
+      req.flash("error", "File upload failed!");
       res.render("index", { error: "File upload failed" });
     }
   }
