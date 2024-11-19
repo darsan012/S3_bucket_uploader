@@ -1,8 +1,8 @@
 // routes for handling login and logout
-import express from "express";
+import { Router } from "express";
 import bcrypt from "bcryptjs";
 
-const loginRouter = new express.Router();
+const loginRouter = Router();
 
 // for rendering login page
 loginRouter.get("/login", (req, res) => {
@@ -12,6 +12,7 @@ loginRouter.get("/login", (req, res) => {
 // post request to the /login route,
 loginRouter.post("/login", (req, res) => {
   const { username, pin } = req.body;
+  // compare the original pin to the hashed pin
   if (
     username === process.env.USER_NAME &&
     bcrypt.compareSync(pin, process.env.USER_PIN)
@@ -20,6 +21,12 @@ loginRouter.post("/login", (req, res) => {
     return res.redirect("/upload");
   }
   req.flash("error", "Invalid credentials");
+  res.redirect("/login");
+});
+
+// logout routes, destroys the session of the user
+loginRouter.get("/logout", (req, res) => {
+  req.session.destroy();
   res.redirect("/login");
 });
 

@@ -1,4 +1,6 @@
 import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import path from "path";
 import session from "express-session";
@@ -6,20 +8,21 @@ import flash from "connect-flash";
 import { fileURLToPath } from "url";
 
 import loginRouter from "./project/routes/loginRouter.js";
-dotenv.config();
+import uploadRouter from "./project/routes/uploadRouter.js";
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
 // using pug as view engine
 app.set("view engine", "pug");
-app.use(express.static("public"));
 
 // mapping to views
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, "project", "public")));
+
 app.set("views", path.join(__dirname, "project", "views"));
 
 // middleware
-app.use(express.urlencoded({ extended: true }));
 // for managing the session
 app.use(
   session({
@@ -32,6 +35,8 @@ app.use(
 app.use(flash());
 // using the login routes for authentication
 app.use("/", loginRouter);
+
+app.use("/upload", uploadRouter);
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

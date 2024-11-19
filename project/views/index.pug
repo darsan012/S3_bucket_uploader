@@ -2,7 +2,7 @@ doctype html
 html
   head
     title Upload Files
-    link(rel="stylesheet" href="/css/style.css")
+    link(rel="stylesheet" href="/css/styles.css")
   body
     .container.mx-auto.p-10
       h1.text-center.text-3xl.mb-6 Welcome!
@@ -14,13 +14,17 @@ html
         input(type="file" name="files" multiple class="mb-4 p-2 border rounded")
         button(type="button" onclick="uploadFiles()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded") Upload
         progress#progressBar(value="0" max="100" class="w-full mt-4 hidden")
-      h2.text-xl.font-bold.mt-8 Uploaded Files
-      ul
-        each file in uploadedFiles
-          li
-            | #{file}
-            form(action="/upload/delete" method="POST" style="display:inline;")
-              input(type="hidden" name="fileName" value=file)
-              button(type="submit" class="text-red-500 underline ml-4") Delete
+        h2.text-xl.font-bold.mt-8 Uploaded Files
+        if uploadedFiles && uploadedFiles.length > 0
+          ul
+            each file in uploadedFiles
+              li
+                | #{file}
+                form(action="/upload/delete" method="POST" style="display:inline;")
+                  input(type="hidden" name="fileName" value=file)
+                  button(type="submit" class="text-red-500 ml-2") Delete
+        else
+          p.text-gray-500.mt-4 No files uploaded yet.
+
       a(href="/logout" class="text-blue-500 underline mt-4 block") Logout
     script(src="/js/script.js")

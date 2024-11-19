@@ -12,13 +12,17 @@
   "author": "Darshan Gautam",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.1692.0",
+    "@aws-sdk/client-s3": "^3.693.0",
+    "@aws-sdk/s3-request-presigner": "^3.693.0",
+    "autoprefixer": "^10.4.20",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "express-session": "^1.18.1",
+    "multer": "^1.4.5-lts.1",
+    "postcss": "^8.4.49",
     "pug": "^3.0.3"
   },
   "devDependencies": {
