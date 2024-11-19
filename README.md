@@ -12,4 +12,4 @@
 - npm install
 - create .env file and copy from .env.example, add values accordingly
 - npm run dev
-- your project is running on localhost:${port}
+- your project is running on localhost:${port}/login
