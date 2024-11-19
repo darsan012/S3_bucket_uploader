@@ -33,7 +33,7 @@ uploadRouter.get("/", isAuthenticated, async (req, res) => {
       Bucket: process.env.S3_BUCKET_NAME,
     });
     const data = await s3Client.send(command);
-    const uploadedFiles = data.Contents.map((item) => item.Key);
+    const uploadedFiles = data?.Contents?.map((item) => item.Key);
     res.render("index", { uploadedFiles });
   } catch (error) {
     res.render("index", { error: error });

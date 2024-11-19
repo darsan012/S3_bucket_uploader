@@ -5,7 +5,7 @@ html
     link(rel="stylesheet", href="https://www.w3schools.com/w3css/4/w3.css")
   body
     .w3-container.w3-padding-32
-      h1.w3-center.w3-xlarge.w3-margin-bottom Welcome!
+      h1.w3-center.w3-xlarge.w3-margin-bottom Upload Your Files
 
       // Display success message
       if success
@@ -15,24 +15,40 @@ html
       if error
         p.w3-text-red #{error}
 
+      // Upload Form
       form#uploadForm(action="/upload", method="POST", enctype="multipart/form-data", class="w3-border w3-round-large w3-padding")
         label(for="files") Select Files to Upload:
-        input(type="file", name="files", multiple, class="w3-input w3-border w3-round-large w3-margin-bottom")
-        button(type="submit", class="w3-button w3-blue w3-hover-shadow w3-round-large") Upload
-        progress#progressBar(value="0", max="100", class="w3-full w3-margin-top w3-hidden")
+        input(type="file", name="files", multiple, class="w3-input w3-border w3-round-large w3-margin-bottom", id="fileInput", required)
         
-        h2.w3-large.w3-bold.w3-margin-top Uploaded Files
-        if uploadedFiles && uploadedFiles.length > 0
-          ul
-            each file in uploadedFiles
-              li
-                | #{file}
-                form(action="/upload/delete", method="POST", style="display:inline;")
-                  input(type="hidden", name="fileName", value=file)
-                  button(type="submit", class="w3-button w3-red w3-small w3-round-large") Delete
-        else
-          p.w3-text-grey.w3-margin-top No files uploaded yet.
+        // Progress Bar (hidden initially)
+        progress#progressBar(value="0", max="100", class="w3-full w3-margin-top w3-hide")
 
+        // Upload Button
+        button(type="submit", class="w3-button w3-blue w3-hover-shadow w3-round-large") Upload
+
+      h2.w3-large.w3-bold.w3-margin-top Uploaded Files
+      if uploadedFiles && uploadedFiles.length > 0
+        ul
+          each file in uploadedFiles
+            li
+              | #{file}
+              form(action="/upload/delete", method="POST", style="display:inline;")
+                input(type="hidden", name="fileName", value=file)
+                button(type="submit", class="w3-button w3-red w3-small w3-round-large") Delete
+      else
+        p.w3-text-grey.w3-margin-top No files uploaded yet.
+
+      // Logout Button
       a(href="/logout", class="w3-button w3-blue w3-round-large w3-margin-top") Logout
 
     script(src="/js/script.js")
+    script.
+      // Frontend Validation: Check if files are selected before submitting
+      const uploadForm = document.getElementById("uploadForm");
+      uploadForm.onsubmit = function(event) {
+        const fileInput = document.getElementById("fileInput");
+        if (!fileInput.files.length) {
+          alert("Please select at least one file to upload.");
+          event.preventDefault(); // Prevent form submission
+        }
+      }
