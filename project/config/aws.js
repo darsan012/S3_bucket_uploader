@@ -7,6 +7,7 @@ import {
 import dotenv from "dotenv";
 dotenv.config();
 
+// creating s3 client to connect to aws
 const s3Client = new S3Client({
   region: process.env.AWS_REGION,
   credentials: {
