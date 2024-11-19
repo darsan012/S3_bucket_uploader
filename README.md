@@ -16,4 +16,4 @@
 
 ## Results
 
-<img src="results.pdf" width="128"/>
+![Results of the application](results.pdf)
