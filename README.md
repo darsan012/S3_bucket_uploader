@@ -16,4 +16,5 @@
 
 ## Results
 
+<embed src="results.pdf" type="application/pdf">
 ![Results of the application](results.pdf)
