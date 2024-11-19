@@ -13,3 +13,7 @@
 - create .env file and copy from .env.example, add values accordingly
 - npm run dev
 - your project is running on localhost:${port}/login
+
+## Results
+
+<img src="results.pdf" width="128"/>
