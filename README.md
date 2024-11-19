@@ -16,4 +16,4 @@
 
 ## Results
 
-<embed src="results.pdf" type="application/pdf">
+[View PDF](results.pdf)
